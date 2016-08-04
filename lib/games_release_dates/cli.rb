@@ -34,7 +34,7 @@ class GamesReleaseDates::CLI
 
   end
 
-  def list_releases(month, system)
+  def list_releases(month, system) #Should call on list build from scrapper and pull dates
     puts <<~eos
     *** #{month} - #{system} ***
     Amplitude (PS4) – January 5
