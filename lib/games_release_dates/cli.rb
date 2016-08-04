@@ -1,26 +1,27 @@
 class GamesReleaseDates::CLI
   def call
     @release_list = GamesReleaseDates::Scraper.new.make_list
+    puts "************VIDEOGAME RELEASE DATES************"
     menu
   end
 
   def menu
-    month_input = nil
-
+    systems = ["PC", "XBOX", "PS4"]
     system_input = nil
 
     puts <<~eos
-      ************VIDEOGAME RELEASE DATES************
         Please enter the system you would like to see releases for:
         PC   ||   XBOX   ||   PS4   ||   EXIT
       ---------------------------------------------------
     eos
     system_input = gets.strip.upcase
 
-    if system_input != "EXIT"
+    if system_input != "EXIT" && systems.any? {|sys| sys == system_input}
       months(system_input)
+    elsif system_input == "EXIT"
+      puts "Thank you! Please have a nice day!"
     else
-      puts "Thank you! have a nice day!"
+      menu
     end
   end
 
