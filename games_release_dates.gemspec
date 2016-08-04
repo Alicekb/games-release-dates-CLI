@@ -6,12 +6,12 @@ require 'games_release_dates/version'
 Gem::Specification.new do |spec|
   spec.name          = "games_release_dates"
   spec.version       = GamesReleaseDates::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["<github email address>"]
+  spec.authors       = "Alice Balbuena"
+  spec.email         = "alicekb01@gmail.com"
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "List a month's game releases"
+  spec.description   = "Provides the video games being released in a specified month."
+  spec.homepage      = "http://rubygems.org/gems/games_release_dates-cli"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
