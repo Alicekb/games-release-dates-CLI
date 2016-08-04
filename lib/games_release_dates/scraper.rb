@@ -6,17 +6,8 @@ class GamesReleaseDates::Scraper
   def make_list
     videogames = []
     self.get_page.css("div#article section ul li").each do |vg|
-<<<<<<< HEAD
-      videogames << vg.text
-    end
-    videogames
-  end
-
-
-=======
       videogames << vg.text.upcase
     end
     videogames
   end
->>>>>>> CLI
 end
