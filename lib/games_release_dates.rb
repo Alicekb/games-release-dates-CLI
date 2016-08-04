@@ -1,5 +1,2 @@
-require "games_release_dates/version"
-
-module GamesReleaseDates
-  # Your code goes here...
-end
+require_relative "./games_release_dates/version"
+require_relative './games_release_dates/cli'

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/games_release_dates'
+
+GamesReleaseDates::CLI.new.call
