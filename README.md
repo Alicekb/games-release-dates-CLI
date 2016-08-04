@@ -4,13 +4,13 @@ This Ruby Gem provides a CLI to view the Video Game release dates for a given mo
 
 ## Installation
 
-gem install games_release_dates
+$ gem install games_release_dates
 
 ## Usage
 
 Type the below and follow the on screen prompts.
 
-worlds-best-restaurants
+$ games_release_dates
 
 ## Development
 
