@@ -1,12 +1,42 @@
 class GamesReleaseDates::CLI
   def call
+# should build list from scrapper here.
     menu
-    list_releases
   end
 
-  def list_releases
+  def menu
+    month_input = nil
+    system_input = nil
+
     puts <<~eos
-    ***JANUARY - PS4***
+      ************VIDEOGAME RELEASE DATES************
+        Please enter the system you would like to see releases for:
+        PC   ||   XBOX ONE   ||   PS4   ||   EXIT
+      ---------------------------------------------------
+    eos
+    system_input = gets.strip.upcase
+
+
+    if system_input != "EXIT"
+      puts <<~eos
+        Please enter the month you would like to see releases for:
+          January       May        September
+          February      June       October
+          March         July       November
+          April         August     December
+        ---------------------------------------------------
+      eos
+      month_input = gets.strip.upcase
+      list_releases(month_input,system_input)
+    else
+      puts "Thank you! have a nice day!"
+    end
+
+  end
+
+  def list_releases(month, system)
+    puts <<~eos
+    *** #{month} - #{system} ***
     Amplitude (PS4) – January 5
     Hardware: Rivals (PS4) – January 5
     Assassin’s Creed Chronicles: India (PC, PS4, Xbox One) – January 12
@@ -19,13 +49,5 @@ class GamesReleaseDates::CLI
     Sébastien Loeb Rally Evo (PC, PS4, Xbox One) – January 29
     This War of Mine: The Little Ones (PS4, Xbox One) – January 29
     eos
-  end
-
-  def menu
-    puts "Welcome to the Video Game Release Date CLI"
-    puts "What month would you like to search the dates for?"
-    month_input = gets.strip
-    puts "What system would you like to search for?"
-    system_input = gets.strip
   end
 end
