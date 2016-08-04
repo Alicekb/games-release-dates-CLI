@@ -10,7 +10,7 @@ $ gem install games_release_dates
 
 Type the below and follow the on screen prompts.
 
-$ games_release_dates
+$ games-release-dates
 
 ## Development
 
