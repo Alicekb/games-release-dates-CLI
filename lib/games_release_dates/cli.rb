@@ -5,39 +5,49 @@ class GamesReleaseDates::CLI
   end
 
   def menu
-
     month_input = nil
+
     system_input = nil
 
     puts <<~eos
       ************VIDEOGAME RELEASE DATES************
         Please enter the system you would like to see releases for:
-        PC   ||   XBOX ONE   ||   PS4   ||   EXIT
+        PC   ||   XBOX   ||   PS4   ||   EXIT
       ---------------------------------------------------
     eos
     system_input = gets.strip.upcase
 
-
     if system_input != "EXIT"
-      puts <<~eos
-        Please enter the month you would like to see releases for:
-          January       May        September
-          February      June       October
-          March         July       November
-          April         August     December
-        ---------------------------------------------------
-      eos
-      month_input = gets.strip.upcase
-      list_releases(month_input,system_input)
+      months(system_input)
     else
       puts "Thank you! have a nice day!"
     end
+  end
 
+  def months(system)
+    months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"]
+    month_input = nil
+
+    puts <<~eos
+      Please enter the month you would like to see releases for:
+        January       May        September
+        February      June       October
+        March         July       November
+        April         August     December
+      ---------------------------------------------------
+    eos
+    month_input = gets.strip.upcase
+
+    if months.any? {|mon| mon == month_input}
+      list_releases(month_input,system)
+    else
+      months(system)
+    end
   end
 
   def list_releases(month, system)
     puts <<~eos
-    *** #{month.upcase} - #{system.upcase} ***
+    *** #{month} - #{system} ***
     ---------------------------------------------------
     eos
     @release_list.each do |games|
