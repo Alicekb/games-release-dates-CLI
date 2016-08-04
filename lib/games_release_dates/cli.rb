@@ -1,10 +1,11 @@
 class GamesReleaseDates::CLI
   def call
-# should build list from scrapper here.
+    @release_list = GamesReleaseDates::Scraper.new.make_list
     menu
   end
 
   def menu
+
     month_input = nil
     system_input = nil
 
