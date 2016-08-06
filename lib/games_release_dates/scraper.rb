@@ -10,4 +10,12 @@ class GamesReleaseDates::Scraper
     end
     videogames
   end
+
+  def get_game(name)
+    Nokogiri::HTML(open("http://thegamesdb.net/api/GetGame.php?name=#{name}"))
+  end
+
+  def game_overview(name)
+    self.get_game(name).at_css("overview").text
+  end
 end
