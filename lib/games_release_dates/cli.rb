@@ -62,7 +62,19 @@ class GamesReleaseDates::CLI
       puts "#{index+1}. #{game}"
     end
 
-    learn_more(system)
+    puts "Would you like to learn more? (Y/N)"
+    learn_input = gets.strip
+    if learn_input == "Y" || learn_input == "y"
+      learn_more(system)
+    elsif learn_input == "N" || learn_input == "n"
+      puts "Would you like to search for another month? (Y/N)"
+      another_month_input = gets.strip
+        if another_month_input == "Y" || another_month_input == "y"
+          months(system)
+        else
+          puts "Thank you! Have a nice day!"
+        end
+    end
   end
 
   def learn_more(system)
@@ -81,8 +93,22 @@ class GamesReleaseDates::CLI
       *** #{game_name} - #{system} ***
       -----------------------------------------------------------
       #{overview}
+      -----------------------------------------------------------
+      Would you like to search for another game? (Y/N)
       eos
+      another_game_input = gets.strip
 
+      if another_game_input == "Y" || another_game_input == "y"
+        learn_more(system)
+      else
+        puts "Would you like to search for another month? (Y/N)"
+        another_month_input = gets.strip
+          if another_month_input == "Y" || another_month_input == "y"
+            months(system)
+          else
+            puts "Thank you! Have a nice day!"
+          end
+      end
     else
       learn_more
     end
