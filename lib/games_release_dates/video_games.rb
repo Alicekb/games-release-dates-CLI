@@ -1,4 +1,4 @@
-class GamesReleaseDates::VideoGame
+class GamesReleaseDates::VideoGames
   attr_accessor :name, :consoles, :release_date
 
   @@video_games = []

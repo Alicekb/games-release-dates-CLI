@@ -2,4 +2,4 @@
 
 require 'games_release_dates'
 
-GamesReleaseDates::CLI.call
+GamesReleaseDates::CLI.new.call

@@ -1,13 +1,11 @@
 class GamesReleaseDates::CLI
   def call
-    @release_list = GamesReleaseDates::Scraper.new.make_list
     puts "************VIDEOGAME RELEASE DATES************"
     menu
   end
 
   def menu
     systems = ["PC", "XBOX", "PS4"]
-
 
     puts <<~eos
         Please enter the system you would like to see releases for:
@@ -27,7 +25,6 @@ class GamesReleaseDates::CLI
 
   def months(system)
     months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"]
-    month_input = nil
 
     puts <<~eos
       Please enter the month you would like to see releases for:
@@ -47,20 +44,17 @@ class GamesReleaseDates::CLI
   end
 
   def list_releases(month, system)
-    @release_dates = []
-    overview_input = nil
+    GamesReleaseDates::Scraper.new.make_list
 
     puts <<~eos
     *** #{month} - #{system} ***
     -----------------------------------------------------------
     eos
-    @release_list.each do |games|
-      @release_dates << games if games.include?("#{system}") && games.include?("– #{month}")
+
+    GamesReleaseDates::VideoGames.all.each_with_index do |vg, index|
+      puts "#{index+1}. #{vg.name} #{vg.consoles} - #{vg.release_date}" if vg.consoles.include?("#{system}") && vg.release_date.include?("#{month}")
     end
 
-    @release_dates.each_with_index do |game, index|
-      puts "#{index+1}. #{game}"
-    end
 
     puts "Would you like to learn more? (Y/N)"
     learn_input = gets.strip

@@ -5,9 +5,10 @@ class GamesReleaseDates::Scraper
 
   def make_list
     self.get_page.css("div#article section ul li").each do |vg|
-      #.gsub(/\([^\(]+/,"") - finds games name
-      GamesReleaseDates::VideoGame.new()
-      vg.text.upcase
+      game_attr = vg.text.upcase.split(" – ")
+
+      video_game = {:name => game_attr[0].gsub(/\s\([^\(]+/,""), :consoles => game_attr[0][/\([^\(]+/], :release_date => game_attr[1]}
+      GamesReleaseDates::VideoGames.new(video_game)
     end
   end
 
