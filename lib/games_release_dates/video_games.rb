@@ -15,8 +15,17 @@ class GamesReleaseDates::VideoGames
   end
 
   def self.list_releases(month, console)
-    self.all.each_with_index do |vg, index|
-      puts "#{vg.name} #{vg.consoles} - #{vg.release_date}" if vg.release_date.to_s.include?("#{month}") && vg.consoles.to_s.include?("#{console}")
+    @searched_games = []
+    self.all.each do |vg|
+      if vg.release_date.to_s.include?("#{month}") && vg.consoles.to_s.include?("#{console}")
+        puts "#{@searched_games.length+1}. #{vg.name} #{vg.consoles} - #{vg.release_date}"
+        @searched_games << vg.name
+      end
     end
+  end
+
+  def self.learn_more(index)
+    puts "****** #{@searched_games[index]} *******"
+    GamesReleaseDates::Scraper.new.get_game("#{@searched_games[index]}")
   end
 end
