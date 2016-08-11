@@ -5,25 +5,25 @@ class GamesReleaseDates::CLI
   end
 
   def menu
-    systems = ["PC", "XBOX", "PS4"]
+    consoles = ["PC", "XBOX", "PS4"]
 
     puts <<~eos
         Please enter the system you would like to see releases for:
         PC   ||   XBOX   ||   PS4   ||   EXIT
       ---------------------------------------------------
     eos
-    system_input = gets.strip.upcase
+    console_input = gets.strip.upcase
 
-    if system_input != "EXIT" && systems.any? {|sys| sys == system_input}
-      months(system_input)
-    elsif system_input == "EXIT"
+    if console_input != "EXIT" && consoles.any? {|sys| sys == console_input}
+      months(console_input)
+    elsif console_input == "EXIT"
       puts "Thank you! Please have a nice day!"
     else
       menu
     end
   end
 
-  def months(system)
+  def months(console)
     months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"]
 
     puts <<~eos
@@ -37,41 +37,41 @@ class GamesReleaseDates::CLI
     month_input = gets.strip.upcase
 
     if months.any? {|mon| mon == month_input}
-      list_releases(month_input,system)
+      list_releases(month_input,console)
     else
-      months(system)
+      months(console)
     end
   end
 
-  def list_releases(month, system)
+  def list_releases(month, console)
     GamesReleaseDates::Scraper.new.make_list
 
     puts <<~eos
-    *** #{month} - #{system} ***
+    *** #{month} - #{console} ***
     -----------------------------------------------------------
     eos
 
-    GamesReleaseDates::VideoGames.all.each_with_index do |vg, index|
-      puts "#{index+1}. #{vg.name} #{vg.consoles} - #{vg.release_date}" if vg.consoles.include?("#{system}") && vg.release_date.include?("#{month}")
-    end
+    GamesReleaseDates::VideoGames.list_releases(month, console)
 
 
-    puts "Would you like to learn more? (Y/N)"
+    puts "Would you like to learn more about a game? (Y/N)"
     learn_input = gets.strip
     if learn_input == "Y" || learn_input == "y"
-      learn_more(system)
+      learn_more(console)
     elsif learn_input == "N" || learn_input == "n"
       puts "Would you like to search for another month? (Y/N)"
       another_month_input = gets.strip
         if another_month_input == "Y" || another_month_input == "y"
-          months(system)
+          months(console)
         else
           puts "Thank you! Have a nice day!"
         end
+    else
+
     end
   end
 
-  def learn_more(system)
+  def learn_more(console)
     puts <<~eos
     -----------------------------------------------------------
     Please enter the number of the game you would like to learn more about:
@@ -84,7 +84,7 @@ class GamesReleaseDates::CLI
       overview = GamesReleaseDates::Scraper.new.game_overview(game_name)
 
       puts <<~eos
-      *** #{game_name} - #{system} ***
+      *** #{game_name} - #{console} ***
       -----------------------------------------------------------
       #{overview}
       -----------------------------------------------------------
@@ -93,12 +93,12 @@ class GamesReleaseDates::CLI
       another_game_input = gets.strip
 
       if another_game_input == "Y" || another_game_input == "y"
-        learn_more(system)
+        learn_more(console)
       else
         puts "Would you like to search for another month? (Y/N)"
         another_month_input = gets.strip
           if another_month_input == "Y" || another_month_input == "y"
-            months(system)
+            months(console)
           else
             puts "Thank you! Have a nice day!"
           end
