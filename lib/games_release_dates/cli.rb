@@ -7,7 +7,7 @@ class GamesReleaseDates::CLI
 
   def menu
     systems = ["PC", "XBOX", "PS4"]
-    system_input = nil
+
 
     puts <<~eos
         Please enter the system you would like to see releases for:

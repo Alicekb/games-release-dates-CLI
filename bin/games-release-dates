@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/games_release_dates'
+require 'games_release_dates'
 
-GamesReleaseDates::CLI.new.call
+GamesReleaseDates::CLI.call

@@ -4,11 +4,9 @@ class GamesReleaseDates::Scraper
   end
 
   def make_list
-    videogames = []
     self.get_page.css("div#article section ul li").each do |vg|
-      videogames << vg.text.upcase
+      vg.text.upcase
     end
-    videogames
   end
 
   def get_game(name)
