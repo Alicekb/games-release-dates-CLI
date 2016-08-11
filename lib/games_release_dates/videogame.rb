@@ -1,16 +1,16 @@
 class GamesReleaseDates::VideoGame
-  attr_accessor :name, :consoles, :release_dates
+  attr_accessor :name, :consoles, :release_date
 
   @@video_games = []
 
-  def initalize(params = {})
+  def initialize(params = {})
     @name = params[:name]
     @consoles = params[:consoles]
-    @release_dates= params[:release_dates]
+    @release_date= params[:release_date]
     @@video_games << self
   end
 
-  def self.all?
+  def self.all
     @@video_games
   end
 end
