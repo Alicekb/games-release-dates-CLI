@@ -28,10 +28,10 @@ class GamesReleaseDates::CLI
       if months.any? {|mon| mon == month_input}
         GamesReleaseDates::Scraper.new.make_list
         puts <<~eos
-        *** #{month} - #{console} ***
+        *** #{month_input} - #{console_input} ***
         -----------------------------------------------------------
         eos
-        GamesReleaseDates::VideoGames.list_releases(month, console)
+        GamesReleaseDates::VideoGames.list_releases(month_input, console_input)
 
         puts "Please enter the number of the game you would like to learn more about?"
         learn_input = gets.strip.to_i
